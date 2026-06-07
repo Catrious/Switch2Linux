@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Switch 2 Linux</title>
+    <style>
+        body { background: #000; color: #fff; text-align: center; font-family: monospace; }
+        #vm_screen { width: 800px; height: 600px; margin: 0 auto; border: 2px solid #555; }
+    </style>
+</head>
+<body>
+
+    <div id="error" style="display:none; padding-top:20vh;">
+        <h1>No internet connection</h1>
+    </div>
+
+    <div id="vm_screen"></div>
+
+    <script src="https://unpkg.com/v86/build/libv86.js"></script>
+    <script>
+if (!navigator.onLine) {
+            document.getElementById("error").style.display = "block";
+        } else {
+var emulator = new V86({
+    screen_container: document.getElementById("vm_screen"),
+    wasm_path: "https://unpkg.com/v86/build/v86.wasm", // This is fine to leave as a CDN
+    bios: { url: "seabios.bin" },        // Look for the file in the SAME folder
+    vga_bios: { url: "vgabios.bin" },    // Look for the file in the SAME folder
+    cdrom: { url: "alpine-linux.iso" },  // Look for the file in the SAME folder
+    autostart: true
+});
+    </script>
+</body>
+</html>
